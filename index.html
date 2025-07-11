@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grassy Field with Trees, Sun, Flowers & Bunnies</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to top, #87ceeb 70%, #ffffff 100%);
+      font-family: Arial, sans-serif;
+    }
+
+    .scene {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sun */
+    .sun {
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at center, #fff700, #fca311);
+      border-radius: 50%;
+      box-shadow: 0 0 50px 15px #fca311aa;
+      animation: sunGlow 5s ease-in-out infinite alternate;
+      z-index: 10;
+    }
+
+    @keyframes sunGlow {
+      0% {
+        box-shadow: 0 0 40px 10px #fca31188;
+      }
+      100% {
+        box-shadow: 0 0 60px 20px #fca311cc;
+      }
+    }
+
+    /* Grass */
+    .grass {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, #228B22, #7CFC00);
+      z-index: 0;
+      overflow: visible;
+    }
+
+    /* Grass blades */
+    .blade {
+      position: absolute;
+      bottom: 0;
+      width: 2px;
+      background: #2e8b57;
+      border-radius: 10px;
+      transform-origin: bottom;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    .blade1 { left: 10%; height: 25px; transform: rotate(-5deg); }
+    .blade2 { left: 15%; height: 30px; transform: rotate(2deg); }
+    .blade3 { left: 20%; height: 22px; transform: rotate(-3deg); }
+    .blade4 { left: 35%; height: 28px; transform: rotate(4deg); }
+    .blade5 { left: 50%; height: 24px; transform: rotate(-6deg); }
+    .blade6 { left: 60%; height: 29px; transform: rotate(3deg); }
+    .blade7 { left: 75%; height: 27px; transform: rotate(-2deg); }
+    .blade8 { left: 85%; height: 26px; transform: rotate(1deg); }
+
+    /* Flowers */
+    .flower {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: pink;
+      box-shadow:
+        -10px 0 pink,
+        10px 0 pink,
+        0 -10px pink,
+        0 10px pink;
+      animation: sway 3s ease-in-out infinite;
+      transform-origin: center bottom;
+      cursor: default;
+    }
+    .flower::after {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      width: 6px;
+      height: 6px;
+      background: yellow;
+      border-radius: 50%;
+    }
+    .flower1 { bottom: 50px; left: 12%; }
+    .flower2 {
+      bottom: 70px; left: 25%;
+      background: lightblue;
+      box-shadow: -10px 0 lightblue, 10px 0 lightblue, 0 -10px lightblue, 0 10px lightblue;
+    }
+    .flower3 { bottom: 60px; left: 38%; background: lavender; }
+    .flower4 { bottom: 55px; left: 52%; background: lightcoral; }
+    .flower5 { bottom: 75px; left: 65%; background: peachpuff; }
+    .flower6 { bottom: 62px; left: 78%; background: lightsalmon; }
+
+    /* Big Trees */
+    .tree {
+      position: absolute;
+      bottom: 40%;
+      width: 120px;
+      height: 250px;
+      z-index: 5;
+      cursor: default;
+    }
+
+    /* Tree trunks */
+    .tree .trunk {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 100px;
+      background: sienna;
+      border-radius: 5px;
+      box-shadow: inset 0 0 8px #6b3b1f;
+      z-index: 2;
+    }
+
+    /* Tree foliage - circle clusters */
+    .tree .foliage {
+      position: absolute;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle at center, #2e8b57, #006400);
+      border-radius: 50%;
+      box-shadow:
+        30px 20px 0 0 #228b22,
+        -30px 15px 0 0 #228b22,
+        0 40px 0 0 #2e8b57;
+      filter: drop-shadow(0 2px 1px #144214);
+      z-index: 1;
+    }
+
+    .tree.left {
+      left: 40px;
+      bottom: 40%;
+      transform: scale(1.2);
+    }
+
+    .tree.right {
+      right: 40px;
+      bottom: 40%;
+      transform: scale(1.1);
+    }
+
+    /* Bunnies */
+    .bunny {
+      position: absolute;
+      bottom: 40px;
+      width: 60px;
+      height: 40px;
+      background: #eee;
+      border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+      box-shadow: inset -5px 0 8px #ccc;
+      cursor: default;
+      animation: bunnyBounce 4s ease-in-out infinite;
+      z-index: 6;
+    }
+
+    /* Bunny face (circle) */
+    .bunny::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 15px;
+      width: 30px;
+      height: 30px;
+      background: #eee;
+      border-radius: 50%;
+      box-shadow: inset -4px 0 8px #ccc;
+      z-index: 7;
+    }
+
+    /* Bunny ears */
+    .bunny::after {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 20px;
+      width: 8px;
+      height: 25px;
+      background: #eee;
+      border-radius: 30% / 50%;
+      box-shadow: inset -2px 0 5px #ccc;
+      transform: rotate(-15deg);
+      z-index: 8;
+    }
+
+    /* Second ear */
+    .bunny .ear2 {
+      position: absolute;
+      top: -40px;
+      left: 35px;
+      width: 8px;
+      height: 25px;
+      background: #eee;
+      border-radius: 30% / 50%;
+      box-shadow: inset -2px 0 5px #ccc;
+      transform: rotate(15deg);
+      z-index: 8;
+    }
+
+    /* Bunny eyes */
+    .bunny .eye {
+      position: absolute;
+      top: -10px;
+      width: 5px;
+      height: 5px;
+      background: black;
+      border-radius: 50%;
+      z-index: 9;
+    }
+    .bunny .eye.left {
+      left: 20px;
+    }
+    .bunny .eye.right {
+      left: 35px;
+    }
+
+    /* Bunny bounce animation */
+    @keyframes bunnyBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Sway animation for flowers and grass */
+    @keyframes sway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Trees -->
+    <div class="tree left">
+      <div class="trunk"></div>
+      <div class="foliage"></div>
+    </div>
+    <div class="tree right">
+      <div class="trunk"></div>
+      <div class="foliage"></div>
+    </div>
+
+    <!-- Grass and flowers -->
+    <div class="grass">
+      <div class="blade blade1"></div>
+      <div class="blade blade2"></div>
+      <div class="blade blade3"></div>
+      <div class="blade blade4"></div>
+      <div class="blade blade5"></div>
+      <div class="blade blade6"></div>
+      <div class="blade blade7"></div>
+      <div class="blade blade8"></div>
+
+      <div class="flower flower1"></div>
+      <div class="flower flower2"></div>
+      <div class="flower flower3"></div>
+      <div class="flower flower4"></div>
+      <div class="flower flower5"></div>
+      <div class="flower flower6"></div>
+    </div>
+
+    <!-- Bunnies -->
+    <div class="bunny" style="left: 15%;">
+      <div class="ear2"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+    </div>
+    <div class="bunny" style="left: 75%; animation-delay: 2s;">
+      <div class="ear2"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+    </div>
+  </div>
+</body>
+</html>
